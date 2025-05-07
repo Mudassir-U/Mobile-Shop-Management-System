@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Database Mobiles</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bootstrap's light background */
+        }
+
+        header {
+            background-color: #343a40; /* Bootstrap dark color for the header */
+            padding: 15px 0;
+        }
+
+        header img {
+            width: 300px;
+            height: auto;
+        }
+
+        header .nav-buttons {
+            margin-left: 30px; /* Adds space between logo and buttons */
+            display: inline-block;
+        }
+
+        header .nav-buttons a {
+            color: white;
+            font-weight: 600;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        header .nav-buttons a:hover {
+            color: #adb5bd;
+            transition: color 0.3s ease-in-out;
+        }
+
+        footer {
+            background-color: #343a40; /* Bootstrap dark footer color */
+            color: white;
+        }
+
+        footer a {
+            color: white !important;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .table img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: rgb(201, 165, 76); /* Bootstrap primary color */
+            border-color: rgb(201, 165, 76);
+        }
+
+        .btn-primary:hover {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+
+        .btn-danger {
+            background-color: #dc3545; /* Bootstrap danger color */
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header with Logo and Text Buttons -->
+    <header class="text-white p-3">
+        <div class="container d-flex justify-content-start align-items-center">
+            <img src="206805728.png" alt="Database Mobiles Logo">
+            <div class="nav-buttons">
+                <a href="/homepage">Products</a>
+                <a href="/customer-order">My Order</a>
+                <a href="/Bootstrap">Visit Main Site</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Content -->
+    <div class="container">
+        <h4>Products in Cart</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product => { %>
+                    <tr>
+                        <td><img src="/<%= product.picture %>" alt="<%= product.title %>"></td>
+                        <td><%= product.title %></td>
+                        <td>PKR <%= product.price %></td>
+                        <td>
+                            <form action="/update-cart/<%= product._id %>" method="POST" style="display: flex; align-items: center; justify-content: center;">
+                                <button type="submit" class="btn btn-primary" name="action" value="decrement">-</button>
+                                <span class="quantity"><%= product.quantity %></span>
+                                <button type="submit" class="btn btn-primary" name="action" value="increment">+</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/remove-from-cart/<%= product._id %>" method="GET">
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <!-- Total Bill -->
+        <div class="cart-summary">
+            <div class="total">Total Bill: PKR <%= total %></div>
+        </div>
+        
+        <!-- Button Group -->
+        <div class="cart-summary d-flex justify-content-end mt-3">
+            <!-- Clear Cart Button -->
+            <form action="/clear-cart" method="POST" style="margin-right: 10px;">
+                <button type="submit" class="btn btn-danger">Clear Cart</button>
+            </form>
+        
+            <!-- Proceed to Checkout Button -->
+            <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-3">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 Database Mobiles. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

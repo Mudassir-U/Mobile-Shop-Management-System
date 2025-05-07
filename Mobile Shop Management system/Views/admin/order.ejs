@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('your-background-image-url.jpg');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin-top: 50px;
+      font-size: 3em;
+    }
+
+    table {
+      width: 80%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.8); /* semi-transparent white background */
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #343a40;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 5px 0;
+      font-size: 1em;
+      color: #555;
+    }
+
+    a {
+      text-decoration: none;
+      color: #4CAF50;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 768px) {
+      table {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Order Details</h1>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+          <th>Payment Method</th>
+          <th>Products</th>
+          <th>Total Bill</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(order => { %>
+          <tr>
+            <td><%= new Date(order.date).toLocaleDateString() %></td> <!-- Displaying date -->
+            <td><%= order.name %></td> <!-- Customer name -->
+            <td><%= order.email %></td>
+            <td><%= order.number %></td> <!-- Phone number -->
+            <td><%= order.address %></td>
+            <td><%= order.paymentMethod %></td>
+            <td>
+              <ul>
+                <% order.products.forEach(product => { %>
+                  <li><%= product.title %> - Quantity: <%= product.quantity %></li> <!-- Display product title and quantity -->
+                <% }); %>
+              </ul>
+            </td>
+            <td><strong><%= order.total %></strong></td> <!-- Total bill -->
+            <td><%= order.status %></td> <!-- Order status -->
+            <td>
+              <% if (order.status === 'Pending') { %>
+                <form action="/admin/order/<%= order._id %>" method="POST" style="display:inline;">
+                  <button type="submit">Mark as Delivered</button>
+                </form>
+              <% } else { %>
+                <button class="light-button" disabled>Delivered</button> <!-- Light button for delivered status -->
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

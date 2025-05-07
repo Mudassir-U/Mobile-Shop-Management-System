@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bismillah Mobiles</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <style>
+        .nav-item {
+            display: flex;
+            align-items: center;
+        }
+
+            .navbar-nav .nav-item {
+                margin-left: 2rem; /* Adds more spacing between buttons */
+            }
+        
+        .admin-link {
+            margin-left: 15px;  /* Adjust as needed */
+        }
+        
+        .navbar-nav .nav-link {
+            transition: text-decoration 0.3s;
+        }
+    
+        .navbar-nav .nav-link:hover {
+            text-decoration: underline; /* Adds underline on hover */
+        }
+    </style>
+    <header class="bg-dark text-white p-3" style="background-color: #343a40;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="206805728.png" alt="Database Mobiles Logo" style="width: 300px; height: auto;" class="me-3">
+            <div class="d-flex">
+                <% if (user) { %>
+                    <!-- Show Logout and Welcome for logged-in users -->
+                    <span class="nav-link text-white ms-3">Welcome <%= user.name %></span>
+                    <a class="nav-link text-white ms-3" href="/logout">Logout</a>
+
+                <% } else { %>
+                    <!-- Show Login and Register for not logged-in users -->
+                    <a class="nav-link text-white ms-3" href="/login">Login</a>
+                    <a class="nav-link text-white ms-3" href="/register">Register</a>
+                <% } %>
+            </div>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: grey;">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#"><i class="fas fa-home"></i></a>
+            <div class="collapse navbar-collapse w-100" id="navbarNav">
+                <!-- Left-aligned links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <% if (user?.role.includes("admin")) { %>
+                        <li class="nav-item ms-4"><a href="/admin/product/:page?" class="nav-link text-white">Admin</a></li>
+                        <li class="nav-item ms-4"><a href="/admin/customer-reviews" class="nav-link text-white">Customer Reviews</a></li>
+                    <% } else { %>
+                        <li class="nav-item ms-4"><a href="/homepage" class="nav-link text-white">Products</a></li>
+                    <% } %>
+                    <li class="nav-item ms-4">
+                        <a class="nav-link text-white" href="#top-selling-products">Top Selling</a>
+                    </li>
+                    <li class="nav-item ms-4">
+                        <a class="nav-link text-white" href="#about-us">About Us</a>
+                    </li>
+                    <li class="nav-item ms-4">
+                        <a class="nav-link text-white" href="#contact-us">Contact Us</a>
+                    </li>
+                </ul>
+    
+                <!-- Right-aligned buttons -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <% if (user && !user?.role.includes("admin")) { %>
+                        <li class="nav-item ms-4">
+                            <a href="/cart" class="nav-link text-white">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+    
+    
+    
+    
+
+    
+
+    <div class="position-relative" style="height: 50vh; overflow: hidden; width: 100%;">
+        <!-- Background Image -->
+        <img src="BG.jpg" alt="Mobile Background" class="w-100" style="object-fit: cover; height: 100%; width: 100%; position: absolute;">
+    
+        <!-- Welcome Text -->
+        <div class="d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100" style="background-color: transparent;">
+            <h2 class="display-4 text-white">Welcome to Database Mobiles</h2>
+            <p class="lead text-white">Explore our top-selling mobile phones!</p>
+        </div>
+    </div>
+    <section id="top-selling-products" class="container mt-5">
+        <h3 class="text-center mb-4">Top Selling Products</h3>
+        <div class="row">
+            <!-- Product 1 -->
+            <div class="col-md-4">
+                <div class="card top-product-card" style="width: 18rem; height: 400px; background-color: #f8f9fa; transition: transform 0.3s, background-color 0.3s;">
+                    <img src="Iphone.jpg" class="card-img-top" alt="Product 1" style="object-fit: cover; height: 200px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Iphone 16Pro Max</h5>
+                        <p> 6.7-inch Super Retina XDR display, A18 Bionic chip, and a triple camera system for stunning photos and videos. The ultimate smartphone experience.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="col-md-4">
+                <div class="card top-product-card" style="width: 18rem; height: 400px; background-color: #f8f9fa; transition: transform 0.3s, background-color 0.3s;">
+                    <img src="Samsung.jpg" class="card-img-top" alt="Product 2" style="object-fit: cover; height: 200px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Samsung24 Ultra</h5>
+                        <p>6.8-inch Dynamic AMOLED display, Snapdragon 8 Gen 3 processor, and a quad-camera setup with a 200MP primary sensor.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="col-md-4">
+                <div class="card top-product-card" style="width: 18rem; height: 400px; background-color: #f8f9fa; transition: transform 0.3s, background-color 0.3s;">
+                    <img src="Ipad.jpg" class="card-img-top" alt="Product 3" style="object-fit: cover; height: 200px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ipad</h5>
+                        <p>A versatile tablet with a stunning Retina display, powerful A14 Bionic chip, and support for Apple Pencil. Perfect for productivity, and creative work.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        /* Hover effect */
+        .top-product-card:hover {
+            transform: scale(1.05);
+            background-color: #e9ecef; /* Change the background color on hover */
+        }
+    
+        .top-product-card {
+            border: 1px solid #ddd; /* Optional border for better card visibility */
+        }
+    </style>
+    
+
+    <section id="about-us" class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>About Us</h3>
+                <p>We are Database Mobiles, a leading retailer of mobile phones and accessories. Our mission is to provide high-quality products at affordable prices.</p>
+                <p>Our CEO, Mr. Ali Khan, has over 20 years of experience in the mobile industry and leads the company with passion and innovation.</p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="CEO.webp" alt="CEO" class="img-fluid rounded-circle" style="width: 150px;">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-us" class="container my-5">
+        <h3 class="text-center mb-4">Contact Us</h3>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p>If you have any questions or need assistance, feel free to reach out to us!</p>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> Email: <a href="mailto:support@databasemobiles.com">support@databasemobiles.com</a></li>
+                    <li><i class="fas fa-phone-alt"></i> Phone: <a href="tel:+123456789">+123 456 789</a></li>
+                    <li><i class="fas fa-map-marker-alt"></i> Address: 123 Mobile St, Tech City</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.619131039967!2d106.74623431542653!3d-6.207981468836354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d045fffd5f%3A0x1ed545c6ad2c4a51!2sBismillah%20Mobiles!5e0!3m2!1sen!2sid!4v1685371382740!5m2!1sen!2sid" 
+                        width="100%" 
+                        height="300" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+    
+
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <ul class="list-unstyled text-left">
+                <li><a href="#" class="text-white"><i class="fas fa-home"></i> Homepage</a></li>
+                <li><a href="#top-selling-products" class="text-white"><i class="fas fa-cogs"></i> Products</a></li>
+                <li><a href="#about-us" class="text-white"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#contact-us" class="text-white"><i class="fas fa-envelope"></i> Contact Us</a></li>
+            </ul>
+            <hr class="bg-light">
+            <p class="mb-0">&copy; 2024 Database Mobiles. All rights reserved</p>
+        </div>
+    </footer>
+    
+    <!-- Font Awesome CDN -->
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    
+</body>
+
+</html>

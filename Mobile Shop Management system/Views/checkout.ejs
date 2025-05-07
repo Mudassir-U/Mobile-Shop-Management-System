@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <!-- Bootstrap CSS for Styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #343a40;
+            padding: 1rem;
+            position: relative;
+        }
+
+        header .navbar-brand {
+            position: absolute;
+            left: 30px; /* Keeps the logo on the left */
+        }
+
+        header h1 {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .checkout-container {
+            padding: 2rem;
+        }
+
+        .form-control {
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: rgb(201, 165, 76);
+            border-color: rgb(201, 165, 76);
+        }
+
+        .btn-primary:hover {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo and Navigation Links -->
+<header>
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="#" class="d-flex justify-content-start align-items-center">
+            <img src="206805728.png" alt="Database Mobiles Logo" width="300" height="auto">
+        </a>
+        <h1 class="mx-auto mr-5">Checkout Page</h1> <!-- Adjusted the right margin -->
+    </div>
+</header>
+
+    <!-- Main Checkout Form -->
+    <div class="container checkout-container">
+        <h2>Order Details</h2>
+        <form action="/checkout" method="POST">
+            <!-- Customer Name -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" id="customerName" name="name" placeholder="Enter your full name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label for="number">Phone Number</label>
+                <input type="tel" class="form-control" id="number" name="number" placeholder="Enter your phone number" required>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label for="address">Delivery Address</label>
+                <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your delivery address" required></textarea>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method</label>
+                <select class="form-control" id="paymentMethod" name="paymentMethod" required>
+                    <option value="Cash">Cash on Delivery</option>
+                </select>
+            </div>
+
+            <!-- Order Date -->
+            <div class="form-group">
+                <label for="orderDate">Order Date</label>
+                <input type="date" class="form-control" id="orderDate" name="orderDate" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Database Mobiles. All rights reserved.</p>
+    </footer>
+
+    <!-- Optional Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

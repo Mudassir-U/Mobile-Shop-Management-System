@@ -1,0 +1,72 @@
+<!-- Search Bar (Aligned to the Right) -->
+<div class="d-flex justify-content-end mb-4">
+    <form action="" method="GET" class="d-flex">
+        <input type="text" name="search" class="form-control me-2" placeholder="Search by Category Name" value="<%= searchQuery || '' %>">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<h3 class="text-center mb-4"><%- pageTitle %></h3>
+
+<!-- Create New Category Button -->
+<div class="d-flex justify-content-center mb-4">
+    <a href="/category/category/create" class="btn btn-create">Create New Category</a>
+</div>
+
+<!-- Categories Table -->
+<div class="table-responsive">
+    <table class="table table-striped table-hover text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Picture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let index = 0; index < categories.length; index++) { %>
+                <tr>
+                    <td><%= categories[index]._id %></td>
+                    <td><%= categories[index].name %></td>
+                    <td>$<%= categories[index].price %></td>
+                    <td><%= categories[index].description %></td>
+                    <td>
+                        <img src="/<%= categories[index].picture %>" alt="Category Image" class="img-thumbnail" width="150" height="150">
+                    </td>
+                    <td>
+                        <a href="/category/category/edit/<%= categories[index]._id %>" class="btn btn-warning btn-sm mx-1">Edit</a>
+                        <a href="/category/category/delete/<%= categories[index]._id %>" class="btn btn-danger btn-sm mx-1">Delete</a>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination (Below Table) -->
+<nav aria-label="Page navigation example" class="my-4">
+    <ul class="pagination justify-content-center">
+        <!-- Previous Button -->
+        <li class="page-item <%= page==1 ? 'disabled' : '' %>">
+            <a class="page-link" href="/category/category/<%= Number(page)-1 %>">Previous</a>
+        </li>
+        <!-- Page Numbers -->
+        <% for (let index = 1; index <= totalPages; index++) { %>
+            <li class="page-item <%= page==index ? 'active' : '' %>">
+                <a class="page-link" href="/category/category/<%= index %>"><%= index %></a>
+            </li>
+        <% } %>
+        <!-- Next Button -->
+        <li class="page-item <%= page==totalPages ? 'disabled' : '' %>">
+            <a class="page-link" href="/category/category/<%= Number(page)+1 %>">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Footer -->
+<footer class="text-center py-3 bg-light">
+    <p>© 2024 Your Company Name. All rights reserved.</p>
+</footer>

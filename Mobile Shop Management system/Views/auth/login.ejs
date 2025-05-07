@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      background: url('https://img.freepik.com/premium-photo/black-smartphone-black-background_14117-867531.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding: 0 40px;
+    }
+
+    /* Dark Overlay for Better Visibility */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 0;
+    }
+
+    /* Login Form Styles */
+    .login-container {
+      position: relative;
+      z-index: 1;
+      background: #343a40;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      max-width: 350px;
+      /* Decreased size */
+      width: 100%;
+      position: absolute;
+      left: 150px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .login-container h3 {
+      margin-bottom: 20px;
+      color: rgb(201, 165, 76);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: block;
+      color: rgb(201, 165, 76);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bbb;
+      border-radius: 7px;
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 20px;
+      background-color: rgb(201, 165, 76);
+      color: black;
+      border: none;
+      border-radius: 7px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: rgb(201, 165, 76);
+    }
+
+    .create-account-link {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .create-account-link a {
+      color: rgb(201, 165, 76);
+      text-decoration: none;
+    }
+
+    .create-account-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Store Name Styles */
+    .store-name {
+      font-size: 50px;
+      font-weight: bold;
+      color: rgb(201, 165, 76);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      position: absolute;
+      right: 300px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .login-container {
+        position: static;
+        margin-bottom: 20px;
+        transform: none;
+      }
+
+      .store-name {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Login Form -->
+  <div class="login-container">
+    <h3>Welcome Back</h3>
+
+    <form action="" method="post">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required />
+      </div>
+
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="create-account-link">
+      <p><a href="/password">Forgot password?</a></p>
+    </div>
+
+    <div class="create-account-link">
+      <p style="color: rgb(240, 235, 235);">Don't have an account? <a href="/register">Sign up here</a></p>
+    </div>
+  </div>
+
+  <!-- Store Name -->
+  <div class="store-name">
+    Database Mobiles
+  </div>
+</body>
+
+</html>

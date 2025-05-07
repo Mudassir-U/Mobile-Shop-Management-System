@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa; /* Light background */
+    }
+
+    header {
+      background-color: #343a40; /* Dark color for header */
+      padding: 15px 0;
+    }
+
+    header img {
+      width: 300px;
+      height: auto;
+    }
+
+    header .nav-buttons {
+      margin-left: 30px; /* Space between logo and buttons */
+      display: inline-block;
+    }
+
+    header .nav-buttons a {
+      color: white;
+      font-weight: 600;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    header .nav-buttons a:hover {
+      color: #adb5bd;
+      transition: color 0.3s ease-in-out;
+    }
+
+    footer {
+      background-color: #343a40; /* Footer color matches header */
+      color: white;
+      padding: 15px 0;
+    }
+
+    footer a {
+      color: white !important;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 80%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    thead th {
+      background-color: #343a40; /* Matches header color */
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .status {
+      font-weight: bold;
+    }
+
+    .pending {
+      color: orange;
+    }
+
+    .delivered {
+      color: green;
+    }
+
+    .review-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .review-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="text-white p-3">
+    <div class="container d-flex justify-content-start align-items-center">
+      <img src="206805728.png" alt="Database Mobiles Logo">
+      <div class="nav-buttons">
+        <a href="/homepage">Products</a>
+        <a href="/cart">Cart</a>
+        <a href="/reviews">My Reviews</a>
+        <a href="/Bootstrap">Visit Main Site</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <h1 class="text-center mt-4">My Orders</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Payment Method</th>
+        <th>Products</th>
+        <th>Total Bill</th>
+        <th>Status</th>
+        <th>Review</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!orders || orders.length === 0) { %>
+        <tr>
+          <td colspan="10" style="text-align: center;">No orders found.</td>
+        </tr>
+      <% } else { %>
+        <% orders.forEach(order => { %>
+          <tr>
+            <td><%= new Date(order.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
+            <td><%= order.name %></td>
+            <td><%= order.email %></td>
+            <td><%= order.number %></td>
+            <td><%= order.address %></td>
+            <td><%= order.paymentMethod %></td>
+            <td>
+              <ul>
+                <% order.products.forEach(product => { %>
+                  <li><%= product.title %> - Quantity: <%= product.quantity %></li>
+                <% }); %>
+              </ul>
+            </td>
+            <td><strong>PKR <%= order.total %></strong></td>
+            <td class="status <%= order.status === 'Pending' ? 'pending' : 'delivered' %>"><%= order.status %></td>
+            <td>
+              <% if (order.status === 'Delivered') { %>
+                <% if (order.hasReviewed) { %>
+                  <span class="thank-you-message">Thanks for your review!</span>
+                <% } else { %>
+                  <button class="review-btn" onclick="handleReviewClick('<%= order._id %>', this)">Give Review</button>
+                <% } %>
+              <% } else { %>
+                <span> - </span>
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      <% } %>
+    </tbody>
+  </table>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p class="mb-0">&copy; 2024 Database Mobiles. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function handleReviewClick(orderId, button) {
+      window.location.href = `/review-form/${orderId}`;
+      button.textContent = "Processing...";
+      button.disabled = true;
+    }
+  </script>
+</body>
+</html>

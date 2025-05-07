@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Reviews</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    header {
+      background-color: #343a40;
+      padding: 15px 0;
+    }
+
+    header img {
+      width: 300px;
+      height: auto;
+    }
+
+    header .nav-buttons {
+      margin-left: 30px;
+      display: inline-block;
+    }
+
+    header .nav-buttons a {
+      color: white;
+      font-weight: 600;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    header .nav-buttons a:hover {
+      color: #adb5bd;
+      transition: color 0.3s ease-in-out;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 15px 0;
+    }
+
+    footer a {
+      color: white !important;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .table-container {
+      width: 90%;
+      margin: 20px auto;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      color: #333;
+    }
+
+    thead th {
+      background-color: #343a40; /* Matches header color */
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .rating {
+      font-weight: bold;
+      color: #4CAF50;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2.5em;
+      color: #343a40;
+    }
+
+    @media (max-width: 768px) {
+      table {
+        font-size: 0.9em;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      th, td {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="text-white p-3">
+    <div class="container d-flex justify-content-start align-items-center">
+      <img src="206805728.png" alt="Database Mobiles Logo">
+      <div class="nav-buttons">
+        <a href="/homepage">Products</a>
+        <a href="/customer-order">My Order</a>
+        <a href="/Bootstrap">Visit Main Site</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <h1>My Reviews</h1>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Products</th>
+          <th>Rating</th>
+          <th>Comment</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (reviews.length === 0) { %>
+          <tr>
+            <td colspan="6" style="text-align: center;">No reviews found.</td>
+          </tr>
+        <% } else { %>
+          <% reviews.forEach(review => { %>
+            <% review.orders.forEach(order => { %>
+              <tr>
+                <td><%= order.name %></td>
+                <td><%= order.email %></td>
+                <td>
+                  <ul>
+                    <% order.products.forEach(product => { %>
+                      <li><%= product.title %></li>
+                    <% }); %>
+                  </ul>
+                </td>
+                <td class="rating"><%= review.rating %></td>
+                <td><%= review.comment %></td>
+                <td><%= new Date(review.date).toLocaleDateString() %></td>
+              </tr>
+            <% }) %>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p class="mb-0">&copy; 2024 Database Mobiles. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

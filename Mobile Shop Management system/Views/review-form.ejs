@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Your Review</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .review-form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 1.1em;
+      color: #555;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1em;
+      margin-top: 5px;
+    }
+
+    textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .form-footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="review-form-container">
+    <h1>Submit Your Review</h1>
+    <form action="/review-form/<%= order._id %>" method="POST">
+      <!-- Hidden fields for order and user IDs -->
+      <input type="hidden" name="orderId" value="<%= order._id %>">
+      <input type="hidden" name="userId" value="<%= order.userId._id %>">
+
+      <!-- Rating -->
+      <div class="form-group">
+        <label for="rating">Rating (1 to 5)</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+      </div>
+
+      <!-- Comment -->
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea id="comment" name="comment" maxlength="500" required></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Submit Review</button>
+    </form>
+
+    <div class="form-footer">
+      <p>Want to go back? <a href="/admin/order">View Your Orders</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

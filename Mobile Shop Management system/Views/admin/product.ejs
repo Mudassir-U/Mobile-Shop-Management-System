@@ -1,0 +1,75 @@
+<!-- Search Bar (Aligned to the Right) -->
+<div class="d-flex justify-content-end mb-4">
+    <form action="/admin/product" method="GET" class="d-flex">
+        <input type="text" name="search" class="form-control me-2" placeholder="Search by Product Title" value="<%= searchQuery || '' %>">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<!-- Create New Product Button -->
+<div class="d-flex justify-content-center mb-4">
+    <a href="/admin/product/create" class="btn btn-create">Create New Product</a>
+</div>
+
+<!-- Products Table -->
+<div class="table-responsive">
+    <table class="table table-striped table-hover text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Description</th>
+                <th>Picture</th>               
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let index = 0; index < products.length; index++) { %>
+                <tr>
+                    <td><%= products[index]._id %></td>
+                    <td><%= products[index].title %></td>
+                    <td>$<%= products[index].price %></td>
+                    <td><%= products[index].stock %></td>
+                    <td><%= products[index].description %></td>
+                    <td>
+                        <img src="/<%= products[index].picture %>" alt="Product Image" class="img-thumbnail" width="100" height="100">
+                    </td>
+                    <td>
+                        <a href="/admin/product/edit/<%= products[index]._id %>" class="btn btn-warning btn-sm mx-1">Edit</a>
+                        <a href="/admin/product/delete/<%= products[index]._id %>" class="btn btn-danger btn-sm mx-1">Delete</a>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination (Below Products) -->
+<div class="text-center mb-3">
+    <span class="fw-bold">Page <%= page %> of <%= totalPages %></span>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <!-- Previous Button -->
+        <li class="page-item <%= page==1 ? 'disabled' : '' %>">
+            <a class="page-link" href="/admin/product/<%= Number(page)-1 %>">Previous</a>
+        </li>
+        <!-- Page Numbers -->
+        <% for(let index = 1; index <= totalPages; index++) { %>
+            <li class="page-item <%= page==index ? 'active' : '' %>">
+                <a class="page-link" href="/admin/product/<%= index %>"><%= index %></a>
+            </li>
+        <% } %>
+        <!-- Next Button -->
+        <li class="page-item <%= page==totalPages ? 'disabled' : '' %>">
+            <a class="page-link" href="/admin/product/<%= Number(page)+1 %>">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Footer -->
+<footer class="text-center py-3 bg-light">
+    <p>© 2024 DatabaseMobiles. All rights reserved.</p>
+</footer>
