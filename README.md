@@ -1,5 +1,4 @@
 # Mobile-Shop-Management-System
-Full Stack Website Project
 After cloning open the project in Microsoft Visual Studio.
 Make sure to install node modules.
 On running, it takes to the registration page and if already have account then move to login screen.
